@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المرشد الذكي للنباتات</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+<div class="page">
+  <header class="header">
+    <img src="{{ url_for('static', filename='images/moe-logo.png') }}" class="logo" alt="وزارة التعليم">
+    <div class="header-text">
+      <span class="badge">منصة تعليمية بيئية ذكية</span>
+      <h1>الإدارة العامة للتعليم بمحافظة الطائف</h1>
+      <p>قسم الأمن والسلامة والمرافق</p>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="library-panel">
+      <div class="leaf-icon">🌿</div>
+      <h2>مكتبة النباتات</h2>
+      <p>مكتبة محلية من 1000 نبات مرتبطة بالمحادثة الذكية.</p>
+      <form action="/library" method="get" class="mini-search">
+        <input name="q" type="text" placeholder="ابحث عن نبات...">
+        <button>بحث</button>
+      </form>
+      <a href="/library?category=النباتات الداخلية" class="item"><span>🪴</span><div><b>النباتات الداخلية</b><small>مناسبة للمكاتب والمنازل</small></div></a>
+      <a href="/library?category=النباتات الخارجية" class="item"><span>🌳</span><div><b>النباتات الخارجية</b><small>للحدائق والمساحات المفتوحة</small></div></a>
+      <a href="/library?category=النباتات المزهرة" class="item"><span>🌸</span><div><b>النباتات المزهرة</b><small>أزهار موسمية ودائمة</small></div></a>
+      <a href="/library?category=الصبارات والعصاريات" class="item"><span>🌵</span><div><b>الصبارات والعصاريات</b><small>تتحمل الجفاف وقلة الماء</small></div></a>
+      <a href="/library" class="show-all">عرض جميع النباتات 🌿</a>
+    </aside>
+
+    <section class="chat-panel">
+      <div class="chat-title">
+        <h2>المساعد الذكي للنباتات 🌱</h2>
+        <p>اسألي عن أي نبات، أو ارفعي صورة واضحة للتحليل.</p>
+      </div>
+      <div id="chatBox" class="chat-box">
+        <div class="message bot">مرحبًا 👋 اكتبي اسم النبات أو المشكلة، وسأعتمد أولًا على مكتبة النباتات المحلية قبل استخدام الذكاء الاصطناعي.</div>
+      </div>
+      <form id="chatForm" class="chat-input">
+        <button type="submit" class="send">➤</button>
+        <input id="messageInput" type="text" placeholder="مثال: كيف أعتني بإكليل الجبل؟">
+        <label class="upload" title="تصوير أو رفع صورة">📷<input id="imageInput" type="file" accept="image/*" capture="environment" hidden></label>
+        <label class="upload" title="إرفاق صورة">📎<input id="fileInput" type="file" accept="image/*" hidden></label>
+      </form>
+      <p class="note">🌿 المعلومات إرشادية، وللحالات المتقدمة يفضل الرجوع لمختص زراعي.</p>
+    </section>
+  </main>
+</div>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

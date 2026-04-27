@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مكتبة النباتات</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+<div class="page">
+  <header class="header">
+    <img src="{{ url_for('static', filename='images/moe-logo.png') }}" class="logo" alt="وزارة التعليم">
+    <div class="header-text">
+      <span class="badge">مكتبة المرشد الذكي</span>
+      <h1>مكتبة النباتات</h1>
+      <p>إجمالي السجلات: {{ total }}</p>
+    </div>
+  </header>
+
+  <section class="library-page">
+    <a href="/" class="back">← العودة للرئيسية</a>
+    <form method="get" action="/library" class="library-search">
+      <input name="q" value="{{ q }}" placeholder="ابحث باسم النبات أو الاسم الإنجليزي أو المشكلة...">
+      <select name="category">
+        <option value="">كل التصنيفات</option>
+        {% for c in categories %}
+        <option value="{{ c.category }}" {% if selected_category == c.category %}selected{% endif %}>{{ c.category }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit">بحث</button>
+    </form>
+
+    {% if plants|length == 0 %}
+      <div class="empty">لا توجد نتائج مطابقة. جرّبي كتابة الاسم بطريقة مختلفة.</div>
+    {% endif %}
+
+    <div class="plants-grid">
+      {% for plant in plants %}
+      <article class="plant-card">
+        <div class="plant-emoji">🌿</div>
+        <h3>{{ plant.name_ar }}</h3>
+        <p><strong>الاسم الإنجليزي:</strong> {{ plant.name_en }}</p>
+        <p><strong>الاسم العلمي:</strong> {{ plant.scientific_name }}</p>
+        <p><strong>التصنيف:</strong> {{ plant.category }}</p>
+        <p><strong>الري:</strong> {{ plant.watering }}</p>
+        <p><strong>الإضاءة:</strong> {{ plant.sunlight }}</p>
+        <p><strong>التربة:</strong> {{ plant.soil }}</p>
+        <p>{{ plant.description }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+</body>
+</html>
